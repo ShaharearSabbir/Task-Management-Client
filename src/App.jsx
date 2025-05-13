@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Header from "./Components/Header";
+import MainBody from "./Components/MainBody";
+import SideBar from "./Components/SideBar";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [tasks, setTasks] = useState([]);
+  const [CompletedTasks, setCompletedTasks] = useState(false);
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <Header setTasks={setTasks} CompletedTasks={CompletedTasks}/>
+      </header>
+      <main className="w-11/12 grid grid-cols-1 lg:grid-cols-12 mx-auto mt-6 gap-6">
+        <div className="lg:col-span-8">
+          <MainBody tasks={tasks} setTasks={setTasks} setCompletedTasks={setCompletedTasks} CompletedTasks={CompletedTasks}/>
+        </div>
+        <div className="lg:col-span-4">
+          <SideBar />
+        </div>
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
